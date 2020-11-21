@@ -2224,6 +2224,9 @@ function lc(f, n, q, p) {
 			})), this.canvas && (this.canvas.width = Math.round(a * b), this.canvas.height = Math.round(d * b), this.Fd ? (this.canvas.style.left = Math.floor(h) + "px", this.canvas.style.top = Math.floor(g) + "px", this.canvas.style.width = Math.round(a) + "px", this.canvas.style.height = Math.round(d) + "px") : this.Vg && !this.Ka && (this.canvas.style.width = Math.round(a) + "px", this.canvas.style.height =
 				Math.round(d) + "px")), this.jc && (this.jc.width = Math.round(a * b), this.jc.height = Math.round(d * b), this.jc.style.width = this.Kl + "px", this.jc.style.height = this.vj + "px"), this.G && this.G.uh(Math.round(a * b), Math.round(d * b)), this.vc && this.Ua && (this.Ua.width = Math.round(a), this.Ua.height = Math.round(d)), this.Ua && this.En(this.Ua, this.La), this.dw(), this.Xt && !this.$c && window.scrollTo(0, 0)
 		}
+
+		// AUTOSPLITTER 1 - on changing the canvas size
+		_autosplitter.onCanvasResize();
 	};
 	f.prototype.dw = function () {
 		if (this.iz && 0 !== this.Eq) {
@@ -2685,6 +2688,10 @@ function lc(f, n, q, p) {
 		this.Zf = this.Gg * this.Bh;
 		this.ub.add(this.Zf);
 		this.Ef.add(d);
+
+		// AUTOSPLITTER 2 - game loop top level - after calculating time in this frame
+		_autosplitter.onUpdate(this.Zf);
+
 		a = (document.mozFullScreen || document.webkitIsFullScreen || document.fullScreen || !!document.msFullscreenElement || this.Cm) && !this.$c;
 		2 <= this.zc || a && 0 < this.Uh ? (d = this.yb / this.xb, b = this.width / this.height,
 			h = this.zc, a && 0 < this.Uh && (h = this.Uh), this.oj = 2 !== h && b > d || 2 === h && b < d ? this.height / this.xb : this.width / this.yb, this.Ea && (this.Ea.Zq(this.Ea.scrollX), this.Ea.$q(this.Ea.scrollY))) : this.oj = this.Vg ? this.devicePixelRatio : 1;
@@ -2741,6 +2748,9 @@ function lc(f, n, q, p) {
 						for (g = 0, l = m.W.length; g < l; g++) r = m.W[g], r.of && r.of()
 	};
 	f.prototype.dt = function (a) {
+		// AUTOSPLITTER 3 - On starting a new level
+		_autosplitter.onScene(a.name);
+
 		var d = this.Ea;
 		this.Ea.WC();
 		var b, h, g;
@@ -8109,6 +8119,9 @@ function rc(f) {
 	};
 	S.j = new B;
 	O.prototype.Play = function (a, b, c, d) {
+		// AUTOSPLITTER 4 - on playing a sound file
+		_autosplitter.onSound(a[0]);
+
 		!Z && (c = Math.pow(10, c / 20), isFinite(c) || (c = 0), 0 > c && (c = 0), 1 < c && (c = 1), I = this.tt(this.b.ip + a[0] + (N ? ".ogg" : ".m4a"), d, a[1], 0 !== b, c)) && (I.dr(!1), I.play(0 !== b, c, 0, this.Eu), this.Eu = 0)
 	};
 	O.prototype.Ly = function () {
@@ -8367,11 +8380,27 @@ function tc(f) {
 	var q = n.M.prototype;
 	q.H = function () {
 		var f = this;
-		this.b.Ka || (jQuery(document).keydown(function (e) {
-			f.sk(e)
-		}), jQuery(document).keyup(function (e) {
-			f.tk(e)
-		}))
+
+		if (!this.b.Ka) {
+			// TAS - hijacking keyboard inputs into the coffee script
+			if (window.tas_mode_active) {
+				window.coffee._keydown(function (e) {
+					f.sk(e);
+				});
+
+				window.coffee._keyup(function (e) {
+					f.tk(e)
+				});
+			} else {
+				jQuery(document).keydown(function (e) {
+					f.sk(e);
+				});
+
+				jQuery(document).keyup(function (e) {
+					f.tk(e)
+				});
+			}
+		}
 	};
 	var p = [32, 33, 34, 35, 36, 37, 38, 39, 40, 44];
 	q.sk = function (f) {
