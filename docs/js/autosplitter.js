@@ -1,5 +1,5 @@
 _autosplitter = function () {
-	var wrs = ["2.08", "2.97", "3.20", "2.45", "1.83", "2.93", "4.60", "4.13", "3.37", "4.62", "2.58", "4.60", "4.08", "4.57", "8.43"];
+	var wrs = ["2.08", "2.97", "3.20", "2.43", "1.83", "2.93", "4.60", "4.13", "3.37", "4.62", "2.58", "4.60", "4.08", "4.57", "8.43"];
 
 	var decimal_places_display = (window.tas_mode_active ? 3 : 2);
 
@@ -195,6 +195,10 @@ _autosplitter = function () {
 		$("#extra_speedrun_stats")
 			.css("right", (canvas_marginLeft + 320) + "px")
 			.css("bottom", (canvas_marginTop + autosplitter_bar_height + 10) + "px");
+
+		$("#div_music_volume")
+			.css("right", canvas_marginLeft + "px")
+			.css("top", canvas_marginTop + "px");
 	}
 
 	/**********

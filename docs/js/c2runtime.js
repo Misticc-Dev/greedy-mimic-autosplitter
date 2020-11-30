@@ -8120,7 +8120,11 @@ function rc(f) {
 	S.j = new B;
 	O.prototype.Play = function (a, b, c, d) {
 		// AUTOSPLITTER 4 - on playing a sound file
-		_autosplitter.onSound(a[0]);
+		var soundName = a[0];
+		_autosplitter.onSound(soundName);
+
+		if (soundName == "the_black_frame" && _volumeHandler.isMusicSilent())
+			return;
 
 		!Z && (c = Math.pow(10, c / 20), isFinite(c) || (c = 0), 0 > c && (c = 0), 1 < c && (c = 1), I = this.tt(this.b.ip + a[0] + (N ? ".ogg" : ".m4a"), d, a[1], 0 !== b, c)) && (I.dr(!1), I.play(0 !== b, c, 0, this.Eu), this.Eu = 0)
 	};
