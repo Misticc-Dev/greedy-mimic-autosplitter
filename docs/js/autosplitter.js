@@ -234,17 +234,13 @@ _autosplitter = function () {
 	Handling alternate keyboard inputs
 	***********/
 
-	$(document).keypress(function (e) {
+	$(document).keydown(function (e) {
 		// Detect press on "C"
 		if (e.which == 67 || e.which == 99) {
 			// Press on J instead
 			var downEvent = jQuery.Event("keydown");
 			downEvent.which = 74;
 			$(document).trigger(downEvent);
-
-			var upEvent = jQuery.Event("keyup");
-			upEvent.which = 74;
-			$(document).trigger(upEvent);
 		}
 
 		// Detect press on "Z"
@@ -253,7 +249,21 @@ _autosplitter = function () {
 			var downEvent = jQuery.Event("keydown");
 			downEvent.which = 87;
 			$(document).trigger(downEvent);
+		}
+	});
 
+	$(document).keyup(function (e) {
+		// Detect press on "C"
+		if (e.which == 67 || e.which == 99) {
+			// Press on J instead
+			var upEvent = jQuery.Event("keyup");
+			upEvent.which = 74;
+			$(document).trigger(upEvent);
+		}
+
+		// Detect press on "Z"
+		if (e.which == 90 || e.which == 122) {
+			// Press on W instead
 			var upEvent = jQuery.Event("keyup");
 			upEvent.which = 87;
 			$(document).trigger(upEvent);
