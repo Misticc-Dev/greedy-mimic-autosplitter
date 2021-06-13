@@ -1,5 +1,5 @@
 _autosplitter = function () {
-	var decimal_places_display = (window.tas_mode_active ? 3 : 2);
+	var decimal_places_display = (TAS_MODE ? 3 : 2);
 
 	var state = {
 		speedrun_mode_active: false,
@@ -136,7 +136,7 @@ _autosplitter = function () {
 		}
 
 		// Handling TAS mode - notifying the TAS tool on entering a new level
-		if (window.tas_mode_active && state.in_level) {
+		if (TAS_MODE && state.in_level) {
 			window.coffee._onScene(state.level);
 		}
 	}
