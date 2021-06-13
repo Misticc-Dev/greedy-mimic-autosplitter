@@ -1,6 +1,4 @@
 _autosplitter = function () {
-	var wrs = ["2.05", "2.90", "3.17", "2.35", "1.77", "2.62", "4.35", "4.01", "3.31", "4.56", "2.49", "4.55", "3.98", "4.29", "8.26"];
-
 	var decimal_places_display = (window.tas_mode_active ? 3 : 2);
 
 	var state = {
@@ -73,7 +71,10 @@ _autosplitter = function () {
 			// Set relevant data for the current level
 			state.levelTime = 0;
 			document.getElementById("level_timer").innerText = (0).toFixed(decimal_places_display);
-			document.getElementById("level_wr").innerText = wrs[state.level - 1];
+			
+			wrTimes = _wrs.getTimes();
+			$("#level_wr_title").text(wrTimes.title);
+			$("#level_wr").text(wrTimes.wrs[state.level - 1]);
 
 			$("#level_select_message").css("visibility", "visible");
 

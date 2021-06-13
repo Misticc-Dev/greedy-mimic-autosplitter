@@ -45,7 +45,7 @@
 
 	<div class="autosplitter-data" id="autosplitter_data">
 		<div> Level time: <span id="level_timer" class="data-number">---</span> || </div>
-		<div> WR: <span id="level_wr" class="data-number">---</span> || </div>
+		<div> <span id="level_wr_title">WR</span>: <span id="level_wr" class="data-number">---</span> || </div>
 
 		<div id="speedrun_mode_data" style="display: none;">
 			<div> Speedrun time: <span id="speedrun_timer" class="data-number"> --- </span> || </div>
@@ -188,6 +188,7 @@
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/jquery.fittext.js"></script>
 
+	<script src="js/wrs.js"></script>
 	<script src="js/speedrun_stats_handler.js"></script>
 	<script src="js/volume_handler.js"></script>
 	<script src="js/autosplitter.js"></script>
@@ -202,6 +203,7 @@
 		console.log("Welcome to or321's speedrun patch for Greedy Mimic by eddynardo.");
 		console.log("You can use 'Z' as an alternate jump button, and 'C' as alternate lick button.");
 		console.log("You can use 'N' to mute/unmute only the music. 'M' is still the master volume key.");
+		console.log("You can set custom pace times by running: _wrs.setCustomTimes(Array);");
 	</script>
 </body>
 
