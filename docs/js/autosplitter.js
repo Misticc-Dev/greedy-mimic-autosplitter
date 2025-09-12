@@ -145,7 +145,7 @@ _autosplitter = function () {
 	Callback function for every tick of the main loop function of the game. Each tick equals one frame of the game.
 	The "frameTime" parameter is the time (in milliseconds) that elapsed since the last tick.
 	*/
-	var TIMER_SPEED = 0.99; 
+	var TIMER_SPEED = 1; 
 
 var onUpdate = function (frameTime) {
     $("#fps_counter").text((1 / frameTime).toFixed());
