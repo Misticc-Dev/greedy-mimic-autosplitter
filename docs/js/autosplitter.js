@@ -145,31 +145,31 @@ _autosplitter = function () {
 	Callback function for every tick of the main loop function of the game. Each tick equals one frame of the game.
 	The "frameTime" parameter is the time (in milliseconds) that elapsed since the last tick.
 	*/
-	var onUpdate = function (frameTime) {
-		// Update the FPS counter for the current frame
-		$("#fps_counter").text((1 / frameTime).toFixed());
+	var TIMER_SPEED = 0.99; 
 
+var onUpdate = function (frameTime) {
+    $("#fps_counter").text((1 / frameTime).toFixed());
 
-		// Don't update timers on the menu or credits
-		if (!state.in_level) return;
+    if (!state.in_level) return;
 
-		// Update the level timer for the current frame if we are not in transition
-		if (!state.in_transition) {
-			state.levelTime += frameTime;
-			$("#level_timer").text(state.levelTime.toFixed(decimal_places_display));
-		}
+    // Level timer
+    if (!state.in_transition) {
+        state.levelTime += frameTime * TIMER_SPEED;
+        $("#level_timer").text(state.levelTime.toFixed(decimal_places_display));
+    }
 
-		// Only when we are in speedrun mode, update the speedrun and transition timers for the current frame
-		if (state.speedrun_mode_active) {
-			state.speedrunTime += frameTime;
-			$("#speedrun_timer").text(state.speedrunTime.toFixed(decimal_places_display));
+    // Speedrun & transition timers
+    if (state.speedrun_mode_active) {
+        state.speedrunTime += frameTime * TIMER_SPEED;
+        $("#speedrun_timer").text(state.speedrunTime.toFixed(decimal_places_display));
 
-			if (state.in_transition) {
-				state.transitionTime += frameTime;
-				$("#transition_timer").text(state.transitionTime.toFixed(decimal_places_display));
-			}
-		}
-	}
+        if (state.in_transition) {
+            state.transitionTime += frameTime * TIMER_SPEED;
+            $("#transition_timer").text(state.transitionTime.toFixed(decimal_places_display));
+        }
+    }
+};
+
 
 
 	/**********
@@ -245,40 +245,57 @@ _autosplitter = function () {
 	***********/
 
 	$(document).keydown(function (e) {
-		// Detect press on "C"
-		if (e.which == 67) {
-			// Press on J instead
-			var downEvent = jQuery.Event("keydown");
-			downEvent.which = 74;
-			$(document).trigger(downEvent);
-		}
+	// Detect press on "C"
+	if (e.which == 67) {
+		// Press on J instead
+		var downEvent = jQuery.Event("keydown");
+		downEvent.which = 74; // J
+		$(document).trigger(downEvent);
+	}
 
-		// Detect press on "Z"
-		if (e.which == 90) {
-			// Press on W instead
-			var downEvent = jQuery.Event("keydown");
-			downEvent.which = 87;
-			$(document).trigger(downEvent);
-		}
-	});
+	// Detect press on "Z"
+	if (e.which == 90) {
+		// Press on W instead
+		var downEvent = jQuery.Event("keydown");
+		downEvent.which = 87; // W
+		$(document).trigger(downEvent);
+	}
 
-	$(document).keyup(function (e) {
-		// Detect press on "C"
-		if (e.which == 67) {
-			// Press on J instead
-			var upEvent = jQuery.Event("keyup");
-			upEvent.which = 74;
-			$(document).trigger(upEvent);
-		}
+	// Detect press on "I" or "i"
+	if (e.which == 75) {
+		// Press the Up Arrow instead
+		var downEvent = jQuery.Event("keydown");
+		downEvent.which = 38; // Up arrow
+		$(document).trigger(downEvent);
+	}
+});
 
-		// Detect press on "Z"
-		if (e.which == 90) {
-			// Press on W instead
-			var upEvent = jQuery.Event("keyup");
-			upEvent.which = 87;
-			$(document).trigger(upEvent);
-		}
-	});
+$(document).keyup(function (e) {
+	// Detect release of "C"
+	if (e.which == 67) {
+		// Release J instead
+		var upEvent = jQuery.Event("keyup");
+		upEvent.which = 74; // J
+		$(document).trigger(upEvent);
+	}
+
+	// Detect release of "Z"
+	if (e.which == 90) {
+		// Release W instead
+		var upEvent = jQuery.Event("keyup");
+		upEvent.which = 87; // W
+		$(document).trigger(upEvent);
+	}
+
+	// Detect release of "I" or "i"
+	if (e.which == 75) {
+		// Release the Up Arrow instead
+		var upEvent = jQuery.Event("keyup");
+		upEvent.which = 38; // Up arrow
+		$(document).trigger(upEvent);
+	}
+});
+
 
 
 	/**********
