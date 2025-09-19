@@ -287,7 +287,7 @@ $(document).keyup(function(e) {
 	}
 
 	// Detect press on "I" or "i"
-	if (e.which ==186) {
+	if (e.which ==75) {
 		// Press the Up Arrow instead
 		var downEvent = jQuery.Event("keydown");
 		downEvent.which = 38; // Up arrow
@@ -313,7 +313,7 @@ $(document).keyup(function (e) {
 	}
 
 	// Detect release of "I" or "i"
-	if (e.which == 186) {
+	if (e.which == 75) {
 		// Release the Up Arrow instead
 		var upEvent = jQuery.Event("keyup");
 		upEvent.which = 38; // Up arrow
