@@ -263,7 +263,7 @@ $(document).keydown(function(e) {
 
 // Detect key release
 $(document).keyup(function(e) {
-    if (e.which === 76) { // L
+    if (e.which === 74) { // L
         clearInterval(spamInterval);
         spamInterval = null;
     }
