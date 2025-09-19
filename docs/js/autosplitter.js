@@ -145,7 +145,7 @@ _autosplitter = function () {
 	Callback function for every tick of the main loop function of the game. Each tick equals one frame of the game.
 	The "frameTime" parameter is the time (in milliseconds) that elapsed since the last tick.
 	*/
-	var TIMER_SPEED = 1; 
+	var TIMER_SPEED = 1;
 
 var onUpdate = function (frameTime) {
     $("#fps_counter").text((1 / frameTime).toFixed());
@@ -243,6 +243,31 @@ var onUpdate = function (frameTime) {
 	/**********
 	Handling alternate keyboard inputs
 	***********/
+let spamInterval = null;
+
+// Detect key press
+$(document).keydown(function(e) {
+    // When L is pressed
+    if (e.which === 76 && !spamInterval) { // 76 is L
+        spamInterval = setInterval(() => {
+            var downEvent = jQuery.Event("keydown");
+            downEvent.which = 74; // J
+            $(document).trigger(downEvent);
+
+            var upEvent = jQuery.Event("keyup");
+            upEvent.which = 74; // J
+            $(document).trigger(upEvent);
+        }, 100); // adjust speed here, 100ms = 10 times per second
+    }
+});
+
+// Detect key release
+$(document).keyup(function(e) {
+    if (e.which === 76) { // L
+        clearInterval(spamInterval);
+        spamInterval = null;
+    }
+});
 
 	$(document).keydown(function (e) {
 	// Detect press on "C"
@@ -253,7 +278,7 @@ var onUpdate = function (frameTime) {
 		$(document).trigger(downEvent);
 	}
 
-	// Detect press on "Z"
+	// Detect press on "k"
 	if (e.which == 90) {
 		// Press on W instead
 		var downEvent = jQuery.Event("keydown");
@@ -279,7 +304,7 @@ $(document).keyup(function (e) {
 		$(document).trigger(upEvent);
 	}
 
-	// Detect release of "Z"
+	// Detect release of "k"
 	if (e.which == 90) {
 		// Release W instead
 		var upEvent = jQuery.Event("keyup");
