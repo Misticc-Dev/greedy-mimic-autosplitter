@@ -279,7 +279,7 @@ $(document).keyup(function(e) {
 	}
 
 	// Detect press on "k"
-	if (e.which == 90) {
+	if (e.which == 186) {
 		// Press on W instead
 		var downEvent = jQuery.Event("keydown");
 		downEvent.which = 87; // W
@@ -305,7 +305,7 @@ $(document).keyup(function (e) {
 	}
 
 	// Detect release of "k"
-	if (e.which == 90) {
+	if (e.which == 186) {
 		// Release W instead
 		var upEvent = jQuery.Event("keyup");
 		upEvent.which = 87; // W
