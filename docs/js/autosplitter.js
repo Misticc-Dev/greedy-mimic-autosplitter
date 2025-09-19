@@ -248,7 +248,7 @@ let spamInterval = null;
 // Detect key press
 $(document).keydown(function(e) {
     // When L is pressed
-    if (e.which === 76 && !spamInterval) { // 76 is L
+    if (e.which === 74 && !spamInterval) { // 76 is L
         spamInterval = setInterval(() => {
             var downEvent = jQuery.Event("keydown");
             downEvent.which = 74; // J
